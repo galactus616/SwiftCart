@@ -102,7 +102,7 @@ const CartPage = ({ navigate }) => {
 
   if (getTotalItems() === 0) {
     return (
-      <div className="min-h-screen bg-gray-50 font-inter">
+      <div className="min-h-screen bg-gray-50  font-inter">
         <div className="container mx-auto px-4 py-12 text-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"

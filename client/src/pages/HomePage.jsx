@@ -74,7 +74,7 @@ const HomePage = ({ navigate, searchQuery = "" }) => {
     return (
       <div className="min-h-screen flex items-center justify-center font-inter text-gray-700 bg-white">
         <HiOutlineShoppingBag
-          className="animate-bounce text-emerald-500"
+          className="animate-bounce text-[#fd9404]"
           size={40}
         />
         <p className="text-lg ml-4">Loading products...</p>
@@ -90,7 +90,7 @@ const HomePage = ({ navigate, searchQuery = "" }) => {
           <p className="text-gray-700 mb-6">{error}</p>
           <button
             onClick={() => window.location.reload()}
-            className="px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-700 transition-all shadow"
+            className="px-6 py-3 bg-[#fd9404] text-white rounded-lg font-semibold hover:bg-yellow-500 transition-all shadow"
           >
             Retry
           </button>
@@ -106,7 +106,7 @@ const HomePage = ({ navigate, searchQuery = "" }) => {
         <div className="flex-1 flex flex-col items-start text-left">
           <h1 className="text-4xl md:text-5xl font-extrabold mb-6 text-gray-900 leading-tight">
             Premium Groceries,{" "}
-            <span className="text-emerald-600">Delivered</span> Fast
+            <span className="text-[#fd9404]">Delivered</span> Fast
           </h1>
           <p className="text-lg text-gray-600 mb-8 max-w-lg">
             Everything you need, delivered to your door in minutes. Discover top
@@ -114,7 +114,7 @@ const HomePage = ({ navigate, searchQuery = "" }) => {
           </p>
           <button
             onClick={() => navigate("categories")}
-            className="px-8 py-3 bg-emerald-600 text-white rounded-full font-semibold text-lg hover:bg-emerald-700 transition shadow"
+            className="px-8 py-3 bg-[#fd9404] text-white rounded-full font-semibold text-lg hover:bg-yellow-500 transition shadow"
           >
             Shop by Category
           </button>
@@ -157,7 +157,7 @@ const HomePage = ({ navigate, searchQuery = "" }) => {
           <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
             Categories
           </h2>
-          <div className="flex flex-wrap justify-center gap-5">
+          <div className="flex justify-center overflow-x-auto overflow-hidden gap-5">
             {categories.map((category) => (
               <CategoryCard
                 key={category.id || category._id}

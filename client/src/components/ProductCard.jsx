@@ -22,7 +22,7 @@ const ProductCard = ({ product, navigate, addToCart, showToast }) => {
   const price = (product.price * rate).toFixed(2);
 
   return (
-    <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 font-inter flex flex-col h-full">
+    <div className="bg-white rounded-xl border border-[#fd9404] shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 font-inter flex flex-col h-full">
       <div
         className="relative w-full h-48 bg-gray-100 flex items-center justify-center cursor-pointer"
         onClick={() =>
@@ -38,7 +38,7 @@ const ProductCard = ({ product, navigate, addToCart, showToast }) => {
       </div>
       <div className="p-4 flex flex-col flex-grow">
         <h3
-          className="text-lg font-semibold text-gray-800 mb-1 cursor-pointer hover:text-green-700 transition-colors"
+          className="text-lg font-semibold text-[#fd9404] mb-1 cursor-pointer transition-colors"
           onClick={() =>
             navigate("productDetail", { productId: product.id || product._id })
           }
@@ -49,7 +49,7 @@ const ProductCard = ({ product, navigate, addToCart, showToast }) => {
           {product.description}
         </p>
         <div className="flex items-center justify-between mt-auto pt-2 border-t border-gray-100">
-          <span className="text-xl font-bold text-green-700">
+          <span className="text-xl font-bold text-[#fd9404]">
             {symbol} {price}
           </span>
           <button
@@ -57,7 +57,7 @@ const ProductCard = ({ product, navigate, addToCart, showToast }) => {
               addToCart(product);
               showToast("Product added to cart!", "success");
             }}
-            className="bg-green-500 text-white py-2 px-4 rounded-lg font-medium hover:bg-green-600 transition-all shadow-md hover:shadow-lg flex items-center gap-1"
+            className="bg-[#fd9404] text-white py-2 px-4 rounded-lg font-medium hover:bg-yellow-500 transition-all shadow-md hover:shadow-lg flex items-center gap-1"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

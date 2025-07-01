@@ -7,15 +7,15 @@ const fallbackImg =
 const CategoryCard = ({ category, navigate }) => {
   const [imgError, setImgError] = React.useState(false);
   // Use FiShoppingBag for all, FiBox as fallback
-  const icon = <FiShoppingBag size={28} className="text-emerald-500" />;
+  const icon = <FiShoppingBag size={28} className="text-[#fd9404]" />;
 
   return (
     <div
       onClick={() =>
         navigate("categoryProducts", { categoryName: category.name })
       }
-      className="cursor-pointer bg-white w-32 h-44 rounded-xl flex flex-col items-center justify-between text-center group transition-all duration-200 p-3 hover:shadow-lg"
-      style={{ minWidth: 128, minHeight: 176 }}
+      className="cursor-pointer  bg-white w-32 rounded-xl flex flex-col items-center justify-between text-center group transition-all duration-200  hover:scale-105"
+      // style={{ minWidth: 128, minHeight: 176 }}
     >
       <div className="w-16 h-16 mb-2 rounded-full bg-gray-100 flex items-center justify-center overflow-hidden border border-gray-200 relative">
         {icon}
@@ -29,7 +29,7 @@ const CategoryCard = ({ category, navigate }) => {
           />
         )}
       </div>
-      <h3 className="text-base font-semibold text-gray-800 mt-2 group-hover:text-emerald-700 transition-colors w-full line-clamp-1 h-6 truncate">
+      <h3 className="text-base font-semibold text-[#fd9404] mt-2 group-hover:text-yellow-500 transition-colors w-[79px] text-ellipsis line-clamp-1 h-6 truncate">
         {category.name}
       </h3>
     </div>

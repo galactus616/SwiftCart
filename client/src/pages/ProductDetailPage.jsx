@@ -47,7 +47,7 @@ const ProductDetailPage = ({ navigate, params }) => {
     return (
       <div className="min-h-screen flex items-center justify-center font-inter text-gray-700">
         <svg
-          className="animate-spin h-10 w-10 text-emerald-500 mr-3"
+          className="animate-spin h-10 w-10 text-[#fd9404] mr-3"
           viewBox="0 0 24 24"
         >
           <circle
@@ -77,7 +77,7 @@ const ProductDetailPage = ({ navigate, params }) => {
           <p className="text-gray-700 mb-6">{error}</p>
           <button
             onClick={() => navigate("home")}
-            className="px-6 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition-all shadow-md"
+            className="px-6 py-3 bg-[#fd9404] text-white rounded-lg font-semibold hover:bg-yellow-500 transition-all shadow-md"
           >
             Back to Home
           </button>
@@ -98,7 +98,7 @@ const ProductDetailPage = ({ navigate, params }) => {
           </p>
           <button
             onClick={() => navigate("home")}
-            className="px-6 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition-all shadow-md"
+            className="px-6 py-3 bg-[#fd9404] text-white rounded-lg font-semibold hover:bg-yellow-500 transition-all shadow-md"
           >
             Back to Home
           </button>
@@ -112,7 +112,7 @@ const ProductDetailPage = ({ navigate, params }) => {
       <div className="max-w-5xl mx-auto px-2 sm:px-4 md:px-8 py-10">
         <button
           onClick={() => navigate("home")}
-          className="flex items-center text-gray-600 hover:text-green-600 mb-6 transition-colors"
+          className="flex items-center text-gray-600 hover:text-yellow-500 mb-6 transition-colors"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -160,10 +160,10 @@ const ProductDetailPage = ({ navigate, params }) => {
             </div>
           </div>
           <div className="w-full md:w-1/2 flex flex-col gap-6">
-            <h1 className="text-3xl md:text-4xl font-extrabold text-gray-800 mb-2">
+            <h1 className="text-3xl md:text-4xl font-extrabold text-[#fd9404] mb-2">
               {product.name}
             </h1>
-            <p className="text-2xl font-bold text-green-700 mb-2">
+            <p className="text-2xl font-bold text-[#fd9404] mb-2">
               ${product.price.toFixed(2)}
             </p>
             <p className="text-gray-700 leading-relaxed mb-4 text-lg">
@@ -223,7 +223,7 @@ const ProductDetailPage = ({ navigate, params }) => {
             </div>
             <button
               onClick={handleAddToCart}
-              className="w-full md:w-auto px-10 py-3 bg-green-600 text-white rounded-xl font-semibold text-lg hover:bg-green-700 transition-all shadow-lg flex items-center justify-center gap-2"
+              className="w-full md:w-auto px-10 py-3 bg-[#fd9404] text-white rounded-xl font-semibold text-lg hover:bg-yellow-500 transition-all shadow-lg flex items-center justify-center gap-2"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

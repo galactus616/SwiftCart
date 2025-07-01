@@ -105,19 +105,19 @@ const Topbar = () => {
 
   return (
     <header className="w-full sticky top-0 z-30 bg-white/90 border-b border-gray-100 shadow-sm">
-      <div className="w-full px-6 py-3 flex items-center justify-between">
+      <div className="w-11/12 md:w-full mx-auto py-3 flex items-center justify-between">
         {/* Logo */}
         <div
           className="flex items-center gap-2 cursor-pointer select-none"
           onClick={() => handleNav("home")}
         >
-          <FiShoppingCart size={28} className="text-emerald-600" />
+          <FiShoppingCart size={28} className="text-[#fd9404]" />
           <span className="text-2xl font-extrabold text-gray-900 tracking-tight">
             SwiftCart
           </span>
         </div>
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-4 mx-auto">
+        <nav className="hidden lg:flex items-center gap-4 mx-auto">
           {navLinks.map((link) => (
             <button
               key={link.key}
@@ -133,7 +133,7 @@ const Topbar = () => {
         {/* Search */}
         <form
           onSubmit={handleSearch}
-          className="hidden md:flex items-center bg-gray-100 rounded-full px-4 py-1 ml-6 w-64 border border-gray-200"
+          className="hidden lg:flex items-center bg-gray-100 rounded-full px-4 py-1 ml-6 w-64 border border-gray-200"
         >
           <FiSearch className="text-gray-400 mr-2" size={18} />
           <input
@@ -147,7 +147,7 @@ const Topbar = () => {
         {/* User, Cart, Currency */}
         <div className="flex items-center gap-2 ml-2">
           {/* Currency Switcher (desktop) */}
-          <div className="hidden md:block relative">
+          <div className="hidden lg:block relative">
             <button
               className="flex items-center gap-1 px-3 py-1 bg-gray-100 rounded-lg text-gray-700 font-medium hover:bg-gray-200 transition"
               onClick={() => setCurrencyDropdown((v) => !v)}
@@ -161,9 +161,9 @@ const Topbar = () => {
                 {currencyOptions.map((c) => (
                   <button
                     key={c.code}
-                    className={`w-full text-left px-4 py-2 hover:bg-gray-50 ${
+                    className={`w-full text-left px-4 py-2 flex hover:bg-gray-50 ${
                       c.code === currency
-                        ? "font-bold text-emerald-600"
+                        ? "font-bold text-[#fd9404]"
                         : "text-gray-700"
                     }`}
                     onClick={() => handleCurrencyChange(c.code)}
@@ -182,22 +182,23 @@ const Topbar = () => {
           >
             <FiShoppingCart size={22} className="text-gray-700" />
             {getTotalItems() > 0 && (
-              <span className="absolute -top-1 -right-1 bg-emerald-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center border-2 border-white">
+              <span className="absolute -top-1 -right-1 bg-[#fd9404] text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center border-2 border-white">
                 {getTotalItems()}
               </span>
             )}
           </button>
           {user ? (
             <>
-              <span className="hidden md:inline text-gray-700 font-semibold">
+              <span className=" text-gray-700 font-semibold">
                 {user.name.split(" ")[0]}
               </span>
-              <span className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-lg font-bold text-emerald-700">
+              <span className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-lg font-bold text-[#fd9404]">
                 {user.name[0]}
               </span>
+
               <button
                 onClick={logout}
-                className="px-3 py-1 bg-white border border-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-all ml-2 flex items-center gap-1"
+                className="px-3 py-1 hidden lg:flex bg-white border border-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-all ml-2  items-center gap-1"
               >
                 <FiLogOut className="mr-1" /> Logout
               </button>
@@ -206,26 +207,27 @@ const Topbar = () => {
             <>
               <button
                 onClick={() => handleNav("login")}
-                className="px-3 py-1 bg-emerald-600 text-white rounded-lg font-medium hover:bg-emerald-700 transition-all flex items-center gap-1"
+                className="px-3 py-1 bg-[#fd9404] text-white rounded-lg font-medium hover:bg-yellow-500 transition-all flex items-center gap-1"
               >
                 <FiLogIn className="mr-1" /> Login
               </button>
               <button
                 onClick={() => handleNav("register")}
-                className="px-3 py-1 border border-emerald-500 text-emerald-600 rounded-lg font-medium hover:bg-emerald-50 transition-all flex items-center gap-1"
+                className="px-3 py-1 border border-[#fd9404] text-[#fd9404] rounded-lg font-medium hover:bg-emerald-50 transition-all flex items-center gap-1"
               >
                 <FiUserPlus className="mr-1" /> Register
               </button>
             </>
           )}
-        </div>
-        {/* Hamburger for mobile */}
+          {/* Hamburger for mobile */}
         <button
-          className="md:hidden ml-2 text-2xl text-emerald-600"
+          className="lg:hidden ml-2 text-2xl text-[#fd9404]"
           onClick={() => setMobileMenuOpen((v) => !v)}
         >
           <FiMenu size={28} />
         </button>
+        </div>
+        
       </div>
       {/* Mobile Menu + Backdrop */}
       {mobileMenuOpen && (
@@ -240,7 +242,7 @@ const Topbar = () => {
           {/* Menu */}
           <div
             ref={menuRef}
-            className="md:hidden fixed top-0 left-0 w-full bg-white shadow-lg border-t border-gray-100 rounded-b-2xl z-50 animate-slideDown"
+            className="lg:hidden fixed top-0 left-0 w-full bg-white shadow-lg border-t border-gray-100 rounded-b-2xl z-50 animate-slideDown"
             style={{ animationDuration: "250ms" }}
           >
             <form
@@ -278,7 +280,7 @@ const Topbar = () => {
                 <FiShoppingCart size={20} className="text-gray-700 mb-1" />
                 <span className="text-xs text-gray-700">Cart</span>
                 {getTotalItems() > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-emerald-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center border-2 border-white">
+                  <span className="absolute -top-1 -right-1 bg-[#fd9404] text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center border-2 border-white">
                     {getTotalItems()}
                   </span>
                 )}
@@ -302,7 +304,7 @@ const Topbar = () => {
                         key={c.code}
                         className={`w-full text-left px-4 py-2 hover:bg-gray-50 ${
                           c.code === currency
-                            ? "font-bold text-emerald-600"
+                            ? "font-bold text-[#fd9404]"
                             : "text-gray-700"
                         }`}
                         onClick={() => handleCurrencyChange(c.code)}
@@ -324,13 +326,13 @@ const Topbar = () => {
                 <>
                   <button
                     onClick={() => handleNav("login")}
-                    className="w-full px-3 py-2 bg-emerald-600 text-white rounded-lg font-medium hover:bg-emerald-700 transition-all mt-2 flex items-center gap-1 justify-center"
+                    className="w-full px-3 py-2 bg-[#fd9404] text-white rounded-lg font-medium hover:bg-yellow-500 transition-all mt-2 flex items-center gap-1 justify-center"
                   >
                     <FiLogIn className="mr-1" /> Login
                   </button>
                   <button
                     onClick={() => handleNav("register")}
-                    className="w-full px-3 py-2 border border-emerald-500 text-emerald-600 rounded-lg font-medium hover:bg-emerald-50 transition-all mt-2 flex items-center gap-1 justify-center"
+                    className="w-full px-3 py-2 border border-[#fd9404] text-[#fd9404] rounded-lg font-medium hover:bg-emerald-50 transition-all mt-2 flex items-center gap-1 justify-center"
                   >
                     <FiUserPlus className="mr-1" /> Register
                   </button>
