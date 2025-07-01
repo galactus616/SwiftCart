@@ -5,7 +5,7 @@ const Layout = ({ children }) => {
   return (
     <div className="min-h-screen bg-white">
       <Topbar />
-      <main className="w-full px-6 py-6">{children}</main>
+      <main>{children}</main>
     </div>
   );
 };

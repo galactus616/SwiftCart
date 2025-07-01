@@ -1,6 +1,7 @@
 import { API_BASE_URL, handleResponse, getAuthHeaders } from "./config";
 
 const login = async (credentials) => {
+  // console.log(credentials)
   const response = await fetch(`${API_BASE_URL}/auth/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
