@@ -1,11 +1,17 @@
-import React from "react";
-import Topbar from "./Topbar";
+import { Outlet } from 'react-router-dom'; // <-- Outlet ইম্পোর্ট করুন
+import Topbar from './Topbar'; // আপনার Topbar কম্পোনেন্ট (যদি থাকে)
+// import Footer from './Footer'; // আপনার Footer কম্পোনেন্ট (যদি থাকে)
 
-const Layout = ({ children }) => {
+const Layout = () => {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="font-inter bg-gray-50">
       <Topbar />
-      <main>{children}</main>
+      
+      <main className="min-h-screen">
+        {/* এখানে আপনার চাইল্ড পেজ কম্পোনেন্টগুলো রেন্ডার হবে */}
+        <Outlet />
+      </main>
+      {/* <Footer /> */}
     </div>
   );
 };
