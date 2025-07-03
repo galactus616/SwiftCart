@@ -1,7 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useLocation, useNavigate, Link } from "react-router-dom"; // ১. প্রয়োজনীয় হুক ও কম্পোনেন্ট ইম্পোর্ট করুন
 
-const OrderConfirmationPage = ({ navigate, params }) => {
-  const orderId = params.orderId || "N/A";
+const OrderConfirmationPage = () => {
+  const navigate = useNavigate(); // ২. useNavigate হুক ব্যবহার করুন
+  const location = useLocation(); // ৩. useLocation হুক ব্যবহার করুন
+
+  // ৪. location.state থেকে orderId নিন
+  const orderId = location.state?.orderId || "N/A";
+
+  // যদি কোনো কারণে orderId না পাওয়া যায়, ব্যবহারকারীকে হোমপেজে পাঠিয়ে দিন
+  useEffect(() => {
+    if (!location.state?.orderId) {
+      console.warn("No orderId found in location state. Redirecting to home.");
+      navigate("/");
+    }
+  }, [location, navigate]);
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center px-4 font-inter">
       <div className="bg-white p-8 rounded-xl shadow-lg text-center w-full max-w-md mt-10 sm:mt-0">
@@ -33,18 +47,19 @@ const OrderConfirmationPage = ({ navigate, params }) => {
           will be delivered soon!
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <button
-            onClick={() => navigate("home")}
+          {/* ৫. বাটনগুলোকে Link কম্পোনেন্ট বা navigate হুক দিয়ে পরিবর্তন করুন */}
+          <Link
+            to="/"
             className="px-6 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition-all shadow-md"
           >
             Continue Shopping
-          </button>
-          <button
-            onClick={() => navigate("orderHistory")}
+          </Link>
+          <Link
+            to="/order-history"
             className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-100 transition-all"
           >
             View My Orders
-          </button>
+          </Link>
         </div>
       </div>
     </div>

@@ -1,13 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom"; // ১. useNavigate ইম্পোর্ট করুন
 import Toast from "../components/Toast";
 import { CartContext } from "../contexts/CartContext";
 import { AuthContext } from "../contexts/AuthContext";
 import { placeOrder as apiPlaceOrder } from "../api/orders";
+import { FiLoader } from "react-icons/fi";
 
-const CheckoutPage = ({ navigate }) => {
-  const { cart, getTotalItems, getTotalPrice, clearCart } =
-    useContext(CartContext);
+const CheckoutPage = () => { // ২. navigate prop সরিয়ে দিন
+  const navigate = useNavigate(); // ৩. useNavigate হুক ব্যবহার করুন
+  const { cart, getTotalItems, getTotalPrice, clearCart } = useContext(CartContext);
   const { user } = useContext(AuthContext);
+
   const [address, setAddress] = useState(user?.address || "");
   const [phone, setPhone] = useState(user?.phone || "");
   const [error, setError] = useState("");
@@ -21,9 +24,9 @@ const CheckoutPage = ({ navigate }) => {
 
   useEffect(() => {
     if (!user) {
-      navigate("login");
+      navigate("/login"); // ৪. সঠিক URL path ব্যবহার করুন
     } else if (getTotalItems() === 0) {
-      navigate("cart");
+      navigate("/cart"); // ৪. সঠিক URL path ব্যবহার করুন
     }
   }, [user, navigate, getTotalItems]);
 
@@ -50,12 +53,18 @@ const CheckoutPage = ({ navigate }) => {
         items: cart.map((item) => ({
           productId: item.product.id || item.product._id,
           quantity: item.quantity,
+          price: item.product.price,
         })),
+        totalAmount: getTotalPrice(),
       };
+      
       const { order } = await apiPlaceOrder(orderData);
-      showToast(`Order ${order.id} placed successfully!`, "success");
-      await clearCart(); // Clear cart after successful order
-      navigate("orderConfirmation", { orderId: order.id });
+      showToast(`Order placed successfully!`, "success");
+      await clearCart();
+      
+      // ৫. state এর মাধ্যমে orderId পাঠান
+      navigate(`/order-confirmation`, { state: { orderId: order.id || order._id } });
+
     } catch (err) {
       console.error("Order placement error:", err);
       setError(err.message || "Failed to place order. Please try again.");
@@ -84,10 +93,7 @@ const CheckoutPage = ({ navigate }) => {
             )}
             <div className="space-y-4 mb-8">
               <div>
-                <label
-                  htmlFor="address"
-                  className="block text-gray-700 text-sm font-medium mb-2"
-                >
+                <label htmlFor="address" className="block text-gray-700 text-sm font-medium mb-2">
                   Delivery Address
                 </label>
                 <textarea
@@ -101,17 +107,14 @@ const CheckoutPage = ({ navigate }) => {
                 ></textarea>
               </div>
               <div>
-                <label
-                  htmlFor="phone"
-                  className="block text-gray-700 text-sm font-medium mb-2"
-                >
+                <label htmlFor="phone" className="block text-gray-700 text-sm font-medium mb-2">
                   Phone Number
                 </label>
                 <input
                   type="tel"
                   id="phone"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500 transition-colors"
-                  placeholder="+91 XXXXXXXXXX"
+                  placeholder="+880 XXXXXXXXXX"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   required
@@ -124,93 +127,26 @@ const CheckoutPage = ({ navigate }) => {
             </h2>
             <div className="space-y-4">
               {/* Cash on Delivery */}
-              <div
-                className="bg-green-50 border border-green-200 rounded-lg p-4 flex items-center space-x-3 cursor-pointer"
-                onClick={() => setSelectedPaymentMethod("cod")}
-              >
-                <input
-                  type="radio"
-                  id="cashOnDelivery"
-                  name="paymentMethod"
-                  value="cod"
-                  className="form-radio text-green-600 h-5 w-5"
-                  checked={selectedPaymentMethod === "cod"}
-                  onChange={() => setSelectedPaymentMethod("cod")}
-                />
-                <label
-                  htmlFor="cashOnDelivery"
-                  className="text-lg font-medium text-gray-800"
-                >
+              <div className="bg-green-50 border border-green-200 rounded-lg p-4 flex items-center space-x-3 cursor-pointer" onClick={() => setSelectedPaymentMethod("cod")}>
+                <input type="radio" id="cashOnDelivery" name="paymentMethod" value="cod" className="form-radio text-green-600 h-5 w-5" checked={selectedPaymentMethod === "cod"} onChange={() => setSelectedPaymentMethod("cod")} />
+                <label htmlFor="cashOnDelivery" className="text-lg font-medium text-gray-800">
                   Cash on Delivery (COD)
                 </label>
               </div>
-              {/* UPI (Disabled) */}
-              <div className="bg-gray-100 border border-gray-200 rounded-lg p-4 flex items-center space-x-3 opacity-60 cursor-not-allowed">
-                <input
-                  type="radio"
-                  id="upi"
-                  name="paymentMethod"
-                  value="upi"
-                  className="form-radio text-gray-400 h-5 w-5"
-                  checked={selectedPaymentMethod === "upi"}
-                  onChange={() => {}}
-                  disabled
-                />
-                <label
-                  htmlFor="upi"
-                  className="text-lg font-medium text-gray-600"
-                >
-                  UPI
-                </label>
-                <span className="ml-auto text-sm text-gray-500 font-semibold px-2 py-1 bg-gray-200 rounded-full">
-                  Coming Soon
-                </span>
-              </div>
-              {/* Credit/Debit Card (Disabled) */}
-              <div className="bg-gray-100 border border-gray-200 rounded-lg p-4 flex items-center space-x-3 opacity-60 cursor-not-allowed">
-                <input
-                  type="radio"
-                  id="card"
-                  name="paymentMethod"
-                  value="card"
-                  className="form-radio text-gray-400 h-5 w-5"
-                  checked={selectedPaymentMethod === "card"}
-                  onChange={() => {}}
-                  disabled
-                />
-                <label
-                  htmlFor="card"
-                  className="text-lg font-medium text-gray-600"
-                >
-                  Credit/Debit Card
-                </label>
-                <span className="ml-auto text-sm text-gray-500 font-semibold px-2 py-1 bg-gray-200 rounded-full">
-                  Coming Soon
-                </span>
-              </div>
+              {/* Other payment methods (Disabled) */}
             </div>
             <p className="text-gray-600 text-sm mt-4">
-              Currently, only Cash on Delivery is available. Other payment
-              methods will be enabled soon!
+              Currently, only Cash on Delivery is available.
             </p>
           </div>
 
-          <div className="lg:col-span-1 bg-white rounded-xl shadow-lg p-6 h-fit">
-            <h2 className="text-xl font-bold text-gray-800 mb-6">
-              Order Summary
-            </h2>
+          <div className="lg:col-span-1 bg-white rounded-xl shadow-lg p-6 h-fit sticky top-24">
+            <h2 className="text-xl font-bold text-gray-800 mb-6">Order Summary</h2>
             <div className="space-y-3 text-gray-700 mb-6">
               {cart.map((item) => (
-                <div
-                  key={item.product.id || item.product._id}
-                  className="flex justify-between text-sm"
-                >
-                  <span>
-                    {item.product.name} x {item.quantity}
-                  </span>
-                  <span>
-                    ${(item.product.price * item.quantity).toFixed(2)}
-                  </span>
+                <div key={item.product.id || item.product._id} className="flex justify-between text-sm">
+                  <span>{item.product.name} x {item.quantity}</span>
+                  <span>${(item.product.price * item.quantity).toFixed(2)}</span>
                 </div>
               ))}
               <div className="border-t border-gray-200 pt-3 flex justify-between font-medium">
@@ -226,45 +162,13 @@ const CheckoutPage = ({ navigate }) => {
               <span>Total Payable:</span>
               <span>${getTotalPrice()}</span>
             </div>
-            <button
-              onClick={handlePlaceOrder}
-              className="w-full mt-8 py-3 bg-green-600 text-white rounded-lg font-semibold text-lg hover:bg-green-700 transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2"
-              disabled={isLoading}
-            >
-              {isLoading && (
-                <svg
-                  className="animate-spin h-5 w-5 text-white"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <circle
-                    className="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                  ></circle>
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                  ></path>
-                </svg>
-              )}
-              Place Order
+            <button onClick={handlePlaceOrder} className="w-full mt-8 py-3 bg-green-600 text-white rounded-lg font-semibold text-lg hover:bg-green-700 transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2" disabled={isLoading}>
+              {isLoading ? <FiLoader className="animate-spin h-5 w-5" /> : 'Place Order'}
             </button>
           </div>
         </div>
       </div>
-      {toast && (
-        <Toast
-          message={toast.message}
-          type={toast.type}
-          onClose={() => setToast(null)}
-        />
-      )}
+      {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
     </div>
   );
 };

@@ -53,7 +53,7 @@ export const Router = createBrowserRouter([
           },
           {
             // ডায়নামিক রাউট: প্রোডাক্ট আইডি দিয়ে
-            path: "product/:productId",
+            path: "product/:id",
             element: <ProductDetailPage />,
           },
           {
