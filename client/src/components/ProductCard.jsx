@@ -10,7 +10,7 @@ const getCurrencyInfo = (currency) => {
 };
 
 const ProductCard = ({ product, addToCart, showToast }) => {
-  console.log(product); // ২. navigate prop সরিয়ে দিন
+  // console.log(product); // ২. navigate prop সরিয়ে দিন
   const [imgError, setImgError] = useState(false);
   const [currency, setCurrency] = useState(
     localStorage.getItem("swiftcart_currency") || "BDT"

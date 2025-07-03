@@ -21,7 +21,7 @@ const OrderConfirmationPage = () => {
       <div className="bg-white p-8 rounded-xl shadow-lg text-center w-full max-w-md mt-10 sm:mt-0">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-24 w-24 text-green-500 mx-auto mb-6"
+          className="h-24 w-24 text-[#fd9404] mx-auto mb-6"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -50,7 +50,7 @@ const OrderConfirmationPage = () => {
           {/* ৫. বাটনগুলোকে Link কম্পোনেন্ট বা navigate হুক দিয়ে পরিবর্তন করুন */}
           <Link
             to="/"
-            className="px-6 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition-all shadow-md"
+            className="px-6 py-3 bg-[#fd9404] text-white rounded-lg font-semibold hover:bg-yellow-500 transition-all shadow-md"
           >
             Continue Shopping
           </Link>

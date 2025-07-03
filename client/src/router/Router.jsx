@@ -14,6 +14,7 @@ import CategoryProductsPage from "../pages/CategoryProductsPage";
 import UserDashboardPage from "../pages/UserDashboardPage";
 import OrderHistoryPage from "../pages/OrderHistoryPage";
 import NoPageFound from "../pages/NoPageFound";
+import CategoriesPage from "../pages/CategoriesPage";
 // একটি 404 পেজ (তৈরি করে নেবেন)
 
 // রাউটার কনফিগারেশন
@@ -31,6 +32,11 @@ export const Router = createBrowserRouter([
             index: true, // ডিফল্ট পেজ (path: "/")
             element: <HomePage />,
           },
+          {
+            path:'categories',
+            element:<CategoriesPage/>
+          },
+
           {
             path: "cart",
             element: <CartPage />,

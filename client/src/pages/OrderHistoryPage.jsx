@@ -1,24 +1,30 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
-import { getOrders as apiGetOrders } from "../api/orders"; // Uses API now
+import { getOrders as apiGetOrders } from "../api/orders";
+import { Link, useNavigate } from "react-router-dom"; // ১. Navigate ইম্পোর্টটি অপ্রয়োজনীয়, তাই সরিয়ে দেওয়া হয়েছে
+import { FiLoader, FiChevronLeft } from "react-icons/fi";
 
-const OrderHistoryPage = ({ navigate }) => {
+const OrderHistoryPage = () => { // ২. navigate prop সরিয়ে দিন
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate(); // ৩. useNavigate হুকটি একবারই ব্যবহার করুন
+  
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+console.log(orders)
   useEffect(() => {
     const fetchOrders = async () => {
       if (!user) {
-        navigate("login");
+        navigate("/login"); // ৪. সঠিক URL path ব্যবহার করুন
         return;
       }
       setLoading(true);
       setError(null);
       try {
         const fetchedOrders = await apiGetOrders();
-        setOrders(fetchedOrders);
+        // নতুন অর্ডারগুলো প্রথমে দেখানোর জন্য সর্ট করা
+        const sortedOrders = fetchedOrders.sort((a, b) => new Date(b.date) - new Date(a.date));
+        setOrders(sortedOrders);
       } catch (err) {
         console.error("Error fetching orders:", err);
         setError("Failed to load your order history.");
@@ -32,15 +38,16 @@ const OrderHistoryPage = ({ navigate }) => {
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center font-inter text-gray-700">
-        <p className="mt-20">Loading your orders...</p>
+        <FiLoader className="animate-spin h-8 w-8 text-[#fd9404]" />
+        <p className="ml-4 text-lg">Loading your orders...</p>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50 font-inter">
-        <div className="container mx-auto px-4 py-8 text-center text-red-600 text-lg">
+      <div className="min-h-screen bg-gray-50 font-inter flex items-center justify-center">
+        <div className="text-center text-red-600 text-lg p-8 bg-white rounded-lg shadow-md">
           {error}
         </div>
       </div>
@@ -50,44 +57,31 @@ const OrderHistoryPage = ({ navigate }) => {
   return (
     <div className="min-h-screen bg-gray-50 font-inter">
       <div className="container mx-auto px-4 py-8">
-        <button
-          onClick={() => navigate("dashboard")}
-          className="flex items-center text-gray-600 hover:text-green-600 mb-6 transition-colors"
+        <Link
+          to="/dashboard" // ৫. বাটনটিকে Link কম্পোনেন্টে পরিবর্তন করা হয়েছে
+          className="flex items-center text-gray-600 hover:text-[#fd9404] mb-6 transition-colors w-fit font-semibold"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 mr-2"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
+          <FiChevronLeft className="h-5 w-5 mr-1" />
           Back to Dashboard
-        </button>
+        </Link>
         <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">
           My Order History
         </h1>
 
         {orders.length === 0 ? (
-          <div className="bg-white rounded-xl shadow-lg p-6 text-center max-w-2xl mx-auto">
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center max-w-2xl mx-auto">
             <p className="text-lg text-gray-700">
               You haven't placed any orders yet.
             </p>
-            <button
-              onClick={() => navigate("home")}
-              className="mt-6 px-6 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition-all shadow-md"
+            <Link
+              to="/" // ৬. বাটনটিকে Link কম্পোনেন্টে পরিবর্তন করা হয়েছে
+              className="mt-6 inline-block px-6 py-3 bg-[#fd9404] text-white rounded-lg font-semibold hover:bg-yellow-500 transition-all shadow-md"
             >
               Start Shopping
-            </button>
+            </Link>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <div className="space-y-6 max-w-4xl mx-auto">
             {orders.map((order) => (
               <div
                 key={order._id}
@@ -117,7 +111,7 @@ const OrderHistoryPage = ({ navigate }) => {
                 </p>
                 <p className="text-gray-600 mb-4">
                   Total:{" "}
-                  <span className="font-medium text-green-700">
+                  <span className="font-medium text-[#fd9404]">
                     ${order.total.toFixed(2)}
                   </span>
                 </p>
@@ -127,9 +121,9 @@ const OrderHistoryPage = ({ navigate }) => {
                   </h4>
                   <ul className="list-disc list-inside text-gray-700 text-sm space-y-1">
                     {order.items.map((item) => (
-                      <li key={item.product.id || item.product._id}>
-                        {item.product.name} x {item.quantity} ($
-                        {(item.product.price * item.quantity).toFixed(2)})
+                      <li key={item.product?._id || item.productId}>
+                        {item.product?.name || 'Product name not available'} x {item.quantity} ($
+                        {(item.product?.price * item.quantity).toFixed(2)})
                       </li>
                     ))}
                   </ul>
@@ -139,10 +133,8 @@ const OrderHistoryPage = ({ navigate }) => {
                   <span className="font-medium">{order.deliveryAddress}</span>
                 </p>
                 <button
-                  onClick={() =>
-                    console.log(`View details for order ${order.orderId}`)
-                  }
-                  className="w-full py-2 border border-green-500 text-green-600 rounded-lg font-medium hover:bg-green-50 transition-all"
+                  onClick={() => console.log(`View details for order ${order.orderId}`)}
+                  className="w-full py-2 border border-[#fd9404] text-[#fd9404] rounded-lg font-medium hover:bg-yellow-50 transition-all"
                 >
                   View Details
                 </button>
