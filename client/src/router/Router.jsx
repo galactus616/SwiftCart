@@ -14,8 +14,10 @@ import CategoryProductsPage from "../pages/CategoryProductsPage";
 import UserDashboardPage from "../pages/UserDashboardPage";
 import OrderHistoryPage from "../pages/OrderHistoryPage";
 import NoPageFound from "../pages/NoPageFound";
-import CategoriesPage from "../pages/CategoriesPage";
-// একটি 404 পেজ (তৈরি করে নেবেন)
+import ProductDetails from './../components/ProductDetails';
+import ProductDetailsPage from "./../components/ProductDetails";
+import CategoriesPage from './../pages/CategoriesPage';
+
 
 // রাউটার কনফিগারেশন
 export const Router = createBrowserRouter([
@@ -60,7 +62,12 @@ export const Router = createBrowserRouter([
           {
             // ডায়নামিক রাউট: প্রোডাক্ট আইডি দিয়ে
             path: "product/:id",
-            element: <ProductDetailPage />,
+            element: <ProductDetailsPage />,
+          },
+          {
+            // ডায়নামিক রাউট: প্রোডাক্ট আইডি দিয়ে
+            path: "product/details",
+            element: <ProductDetails/>,
           },
           {
             // ডায়নামিক রাউট: ক্যাটাগরি নাম দিয়ে

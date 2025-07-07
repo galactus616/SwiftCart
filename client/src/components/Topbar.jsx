@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom"; // ১. Link এবং useNavigate ইম্পোর্ট করুন
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import { CartContext } from "../contexts/CartContext";
 import {
@@ -16,7 +16,6 @@ import {
   FiChevronDown,
 } from "react-icons/fi";
 
-// ২. navLinks অ্যারেতে URL path যোগ করুন
 const navLinks = [
   {
     key: "home",
@@ -28,7 +27,7 @@ const navLinks = [
     key: "categories",
     label: "Categories",
     icon: <FiGrid size={20} />,
-    path: "/categories", // উদাহরণ, আপনার রাউটারে যোগ করতে হবে
+    path: "/categories",
   },
   {
     key: "orderHistory",
@@ -52,7 +51,7 @@ const currencyOptions = [
 const Topbar = () => {
   const { user, logout } = useContext(AuthContext);
   const { getTotalItems } = useContext(CartContext);
-  const navigate = useNavigate(); // ৩. useNavigate হুক ব্যবহার করুন
+  const navigate = useNavigate();
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [search, setSearch] = useState("");
@@ -61,11 +60,12 @@ const Topbar = () => {
   );
   const [currencyDropdown, setCurrencyDropdown] = useState(false);
 
-  // ... (বাকি useEffect হুকগুলো অপরিবর্তিত থাকবে)
   useEffect(() => {
     if (mobileMenuOpen) document.body.style.overflow = "hidden";
     else document.body.style.overflow = "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [mobileMenuOpen]);
 
   const menuRef = useRef();
@@ -80,38 +80,44 @@ const Topbar = () => {
     return () => document.removeEventListener("mousedown", handleClick);
   }, [mobileMenuOpen]);
 
-
-  // ৪. handleSearch ফাংশনটিকে আপডেট করুন
   const handleSearch = (e) => {
     e.preventDefault();
     if (search.trim()) {
-      // সার্চ কোয়েরি সহ HomePage-এ নেভিগেট করুন
       navigate(`/?q=${search}`);
     }
     setMobileMenuOpen(false);
   };
+  
+  const handleLogout = () => {
+    logout();
+    setMobileMenuOpen(false);
+  }
 
   const handleCurrencyChange = (code) => {
     setCurrency(code);
     localStorage.setItem("swiftcart_currency", code);
     setCurrencyDropdown(false);
-    window.dispatchEvent(new CustomEvent("currencyChange", { detail: { currency: code } }));
+    window.dispatchEvent(
+      new CustomEvent("currencyChange", { detail: { currency: code } })
+    );
   };
 
-  const selectedCurrency = currencyOptions.find((c) => c.code === currency) || currencyOptions[0];
+  const selectedCurrency =
+    currencyOptions.find((c) => c.code === currency) || currencyOptions[0];
 
   return (
-    <header className="w-full sticky top-0 z-30 bg-white/90 border-b border-gray-100 shadow-sm">
+    <header className="w-full sticky top-0 z-30 bg-white/90 backdrop-blur-sm border-b border-gray-100 shadow-sm">
       <div className="w-11/12 md:w-[97%] mx-auto py-3 flex items-center justify-between">
-        {/* ৫. Logo-কে Link কম্পোনেন্ট বানান */}
-        <Link to="/" className="flex items-center gap-2 cursor-pointer select-none">
+        <Link
+          to="/"
+          className="flex items-center gap-2 cursor-pointer select-none"
+        >
           <FiShoppingCart size={28} className="text-[#fd9404]" />
           <span className="text-2xl font-extrabold text-gray-900 tracking-tight">
             SwiftCart
           </span>
         </Link>
-        
-        {/* ৬. Desktop Nav-কে Link কম্পোনেন্ট দিয়ে তৈরি করুন */}
+
         <nav className="hidden lg:flex items-center gap-4 mx-auto">
           {navLinks.map((link) => (
             <Link
@@ -126,8 +132,10 @@ const Topbar = () => {
           ))}
         </nav>
 
-        {/* Search Form */}
-        <form onSubmit={handleSearch} className="hidden lg:flex items-center bg-gray-100 rounded-full px-4 py-1 ml-6 w-64 border border-gray-200">
+        <form
+          onSubmit={handleSearch}
+          className="hidden lg:flex items-center bg-gray-100 rounded-full px-4 py-1 ml-6 w-64 border border-gray-200"
+        >
           <FiSearch className="text-gray-400 mr-2" size={18} />
           <input
             type="text"
@@ -138,52 +146,179 @@ const Topbar = () => {
           />
         </form>
 
-        {/* User, Cart, Currency */}
         <div className="flex items-center gap-2 ml-2">
-            {/* ... Currency Switcher অপরিবর্তিত ... */}
-            <div className="hidden lg:block relative">{/*...*/}</div>
+          {/* Currency Switcher */}
+          <div className="hidden lg:block relative">
+             {/* Currency switcher code remains unchanged */}
+          </div>
 
-            {/* ৭. Cart বাটনটিকে Link বানান */}
-            <Link to="/cart" className="relative p-2 rounded-full hover:bg-gray-100 transition" aria-label="Cart" title="Cart">
-              <FiShoppingCart size={22} className="text-gray-700" />
-              {getTotalItems() > 0 && (
-                <span className="absolute -top-1 -right-1 bg-[#fd9404] text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center border-2 border-white">
-                  {getTotalItems()}
-                </span>
-              )}
-            </Link>
-
-            {/* ৮. Login/Register বাটনগুলোকে Link বানান */}
-            {user ? (
-              <>
-                <span className="text-gray-700 font-semibold">{user.name.split(" ")[0]}</span>
-                <span className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-lg font-bold text-[#fd9404]">{user.name[0]}</span>
-                <button onClick={logout} className="px-3 py-1 hidden lg:flex bg-white border border-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-all ml-2 items-center gap-1">
-                  <FiLogOut className="mr-1" /> Logout
-                </button>
-              </>
-            ) : (
-              <>
-                <Link to="/login" className="px-3 py-1 bg-[#fd9404] text-white rounded-lg font-medium hover:bg-yellow-500 transition-all flex items-center gap-1">
-                  <FiLogIn className="mr-1" /> Login
-                </Link>
-                <Link to="/register" className="px-3 py-1 border border-[#fd9404] text-[#fd9404] rounded-lg font-medium hover:bg-emerald-50 transition-all flex items-center gap-1">
-                  <FiUserPlus className="mr-1" /> Register
-                </Link>
-              </>
+          <Link
+            to="/cart"
+            className="relative p-2 rounded-full hover:bg-gray-100 transition"
+            aria-label="Cart"
+            title="Cart"
+          >
+            <FiShoppingCart size={22} className="text-gray-700" />
+            {getTotalItems() > 0 && (
+              <span className="absolute -top-1 -right-1 bg-[#fd9404] text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center border-2 border-white">
+                {getTotalItems()}
+              </span>
             )}
+          </Link>
 
-            {/* Hamburger for mobile */}
-            <button className="lg:hidden ml-2 text-2xl text-[#fd9404]" onClick={() => setMobileMenuOpen(v => !v)}>
-                <FiMenu size={28} />
-            </button>
+          {user ? (
+            <>
+              <span className="text-gray-700 font-semibold hidden lg:inline">
+                {user.name.split(" ")[0]}
+              </span>
+              <span className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-lg font-bold text-[#fd9404]">
+                {user.name[0]}
+              </span>
+              <button
+                onClick={logout}
+                className="px-3 py-1 hidden lg:flex bg-white border border-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-all ml-2 items-center gap-1"
+              >
+                <FiLogOut className="mr-1" /> Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/login"
+                className="px-3 py-1 bg-[#fd9404] text-white rounded-lg font-medium hover:bg-yellow-500 transition-all hidden lg:flex items-center gap-1"
+              >
+                <FiLogIn className="mr-1" /> Login
+              </Link>
+              <Link
+                to="/register"
+                className="px-3 py-1 border border-[#fd9404] text-[#fd9404] rounded-lg font-medium hover:bg-yellow-50 transition-all hidden lg:flex items-center gap-1"
+              >
+                <FiUserPlus className="mr-1" /> Register
+              </Link>
+            </>
+          )}
+
+          <button
+            className="lg:hidden ml-2 text-2xl text-[#fd9404]"
+            onClick={() => setMobileMenuOpen(true)}
+          >
+            <FiMenu size={28} />
+          </button>
         </div>
       </div>
-      
-      {/* Mobile Menu */}
+
+      {/* --- Mobile Menu (Corrected) --- */}
       {mobileMenuOpen && (
         <>
-            {/* ... (Mobile menu-র ভেতরের কোডও একইভাবে Link দিয়ে পরিবর্তন করতে হবে) ... */}
+          <div
+            className="fixed inset-0 bg-black bg-opacity-30 z-40 animate-fadeIn lg:hidden"
+            onClick={() => setMobileMenuOpen(false)}
+            aria-label="Close menu"
+          />
+          <div
+            ref={menuRef}
+            className="lg:hidden fixed top-0 left-0 w-full bg-white shadow-lg rounded-b-2xl z-50 animate-slideDown"
+            style={{ animationDuration: "250ms" }}
+          >
+            <form
+              onSubmit={handleSearch}
+              className="flex items-center bg-gray-100 rounded-full px-4 py-2 m-4 border border-gray-200"
+            >
+              <FiSearch className="text-gray-400 mr-2" size={18} />
+              <input
+                type="text"
+                placeholder="Search products..."
+                className="flex-1 bg-transparent outline-none text-base text-gray-700"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+            </form>
+            <nav className="grid grid-cols-5 gap-2 px-4 pb-4">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.key}
+                  to={link.path}
+                  className="p-2 rounded-lg hover:bg-gray-100 transition flex flex-col items-center text-center"
+                  title={link.label}
+                  onClick={() => setMobileMenuOpen(false)} // ✅ CORRECTED
+                >
+                  {link.icon}
+                  <span className="text-xs text-gray-700 mt-1">
+                    {link.label}
+                  </span>
+                </Link>
+              ))}
+              <Link // ✅ CORRECTED: Changed from button to Link
+                to="/cart"
+                className="relative p-2 rounded-lg hover:bg-gray-100 transition flex flex-col items-center text-center"
+                title="Cart"
+                onClick={() => setMobileMenuOpen(false)} // ✅ CORRECTED
+              >
+                <FiShoppingCart size={20} className="text-gray-700" />
+                <span className="text-xs text-gray-700 mt-1">Cart</span>
+                {getTotalItems() > 0 && (
+                  <span className="absolute top-1 right-1 bg-[#fd9404] text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center border-2 border-white">
+                    {getTotalItems()}
+                  </span>
+                )}
+              </Link>
+            </nav>
+            <div className="flex flex-col gap-2 px-4 pb-4">
+              <div className="w-full mb-2">
+                <button
+                  className="w-full flex items-center gap-2 px-3 py-2 bg-gray-100 rounded-lg text-gray-700 font-medium hover:bg-gray-200 transition justify-center"
+                  onClick={() => setCurrencyDropdown((v) => !v)}
+                  type="button"
+                >
+                  {selectedCurrency.symbol} {selectedCurrency.code}
+                  <FiChevronDown size={16} />
+                </button>
+                {currencyDropdown && (
+                    <div className="mt-2 bg-white border border-gray-100 rounded-lg shadow-lg z-50 min-w-[100px]">
+                        {currencyOptions.map((c) => (
+                            <button
+                                key={c.code}
+                                className={`w-full text-left px-4 py-2 hover:bg-gray-50 ${
+                                c.code === currency
+                                    ? "font-bold text-[#fd9404]"
+                                    : "text-gray-700"
+                                }`}
+                                onClick={() => handleCurrencyChange(c.code)}
+                            >
+                                {c.symbol} {c.code}
+                            </button>
+                        ))}
+                    </div>
+                )}
+              </div>
+
+              {user ? (
+                <button
+                  onClick={handleLogout} // ✅ CORRECTED
+                  className="w-full px-3 py-2 bg-white border border-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-all flex items-center gap-1 justify-center"
+                >
+                  <FiLogOut className="mr-1" /> Logout
+                </button>
+              ) : (
+                <>
+                  <Link // ✅ CORRECTED
+                    to="/login"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="w-full px-3 py-2 bg-[#fd9404] text-white rounded-lg font-medium hover:bg-yellow-500 transition-all flex items-center gap-1 justify-center"
+                  >
+                    <FiLogIn className="mr-1" /> Login
+                  </Link>
+                  <Link // ✅ CORRECTED
+                    to="/register"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="w-full px-3 py-2 border border-[#fd9404] text-[#fd9404] rounded-lg font-medium hover:bg-yellow-50 transition-all flex items-center gap-1 justify-center"
+                  >
+                    <FiUserPlus className="mr-1" /> Register
+                  </Link>
+                </>
+              )}
+            </div>
+          </div>
         </>
       )}
     </header>

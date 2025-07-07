@@ -1,31 +1,53 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext";
-import { useNavigate, Link } from "react-router-dom"; // ১. Link এবং useNavigate ইম্পোর্ট করুন
+import { useNavigate, Link } from "react-router-dom";
 import { FiUser, FiList, FiEdit, FiLogOut } from "react-icons/fi";
 
-const UserDashboardPage = () => { // ২. navigate prop সরিয়ে দিন
-  const { user, logout } = useContext(AuthContext);
-  const navigate = useNavigate(); // ৩. useNavigate হুক ব্যবহার করুন
+const UserDashboardPage = () => {
+  const { user, logout, updateUserProfile } = useContext(AuthContext);
+  const [loader, setLoader] = useState(false); // Corrected typo: setloader to setLoader
+  const navigate = useNavigate();
+  console.log(user);
 
   useEffect(() => {
     if (!user) {
-      navigate("/login"); // ৪. সঠিক URL path ব্যবহার করুন
+      navigate("/login");
     }
   }, [user, navigate]);
 
-  // যদি user লোড না হয়, তাহলে কিছু রেন্ডার না করে অপেক্ষা করুন
   if (!user) {
     return null;
   }
-  
+
   const handleLogout = () => {
     logout();
-    navigate("/"); // লগআউট করার পর হোমপেজে পাঠিয়ে দিন
-  }
+    navigate("/");
+  };
 
-  const handleEditProfile = () => {
-    console.log("Edit Profile functionality would go here! This is a placeholder.");
-    // এখানে প্রোফাইল এডিট করার জন্য একটি মডাল বা নতুন পেজ দেখানো যেতে পারে
+  const handleSubmit = async (e) => { // Added async keyword
+    setLoader(true); // Corrected typo: setloader to setLoader
+    e.preventDefault();
+
+    // Get the form data
+    const from =e.target;
+    const phone = from.phone?.value;
+    console.log(phone);
+    const address = from.address?.value;
+    console.log(address);
+  const profileData = {
+    phone: phone,
+    address: address, // Assuming 'address' is a field with a 'value'
+  };
+    try {
+      await updateUserProfile(profileData); // Pass phone and address to updateUserProfile
+      document.getElementById("my_modal_1").close(); // Close the modal on successful update
+      alert("Profile updated successfully!"); // Optional: show a success message
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      alert("Failed to update profile. Please try again."); // Optional: show an error message
+    } finally {
+      setLoader(false); // Corrected typo: setloader to setLoader
+    }
   };
 
   return (
@@ -41,13 +63,11 @@ const UserDashboardPage = () => { // ২. navigate prop সরিয়ে দি�
               {user.name[0]}
             </div>
             <div>
-                <h2 className="text-2xl font-bold text-gray-800">
-                  {user.name}
-                </h2>
-                <p className="text-gray-600">{user.email}</p>
+              <h2 className="text-2xl font-bold text-gray-800">{user.name}</h2>
+              <p className="text-gray-600">{user.email}</p>
             </div>
           </div>
-          
+
           <h3 className="text-xl font-bold text-gray-800 mb-4">
             Profile Information
           </h3>
@@ -66,7 +86,6 @@ const UserDashboardPage = () => { // ২. navigate prop সরিয়ে দি�
             Account Actions
           </h3>
           <div className="flex gap-2">
-            {/* ৫. বাটনটিকে Link কম্পোনেন্টে পরিবর্তন করা হয়েছে */}
             <Link
               to="/order-history"
               className="w-full py-3 bg-[#fd9404] text-white rounded-lg font-semibold hover:bg-yellow-500 transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2"
@@ -75,7 +94,7 @@ const UserDashboardPage = () => { // ২. navigate prop সরিয়ে দি�
               My Orders
             </Link>
             <button
-              onClick={handleEditProfile}
+              onClick={() => document.getElementById("my_modal_1").showModal()}
               className="w-full py-3 border border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-100 transition-all flex items-center justify-center gap-2"
             >
               <FiEdit className="h-5 w-5" />
@@ -91,6 +110,102 @@ const UserDashboardPage = () => { // ২. navigate prop সরিয়ে দি�
           </div>
         </div>
       </div>
+      {/* modal for profile update  */}
+      <dialog id="my_modal_1" className="modal">
+        <div className="modal-box bg-gray-50 flex flex-col justify-center">
+          <h3 className="font-bold text-lg text-center">Profile Details</h3>
+
+          <div className="modal-action flex justify-center ">
+            <form
+              method="dialog"
+              onSubmit={handleSubmit}
+              className="space-y-2 "
+            >
+              {/* name */}
+              <div>
+                <label
+                  htmlFor="Name"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Name
+                </label>
+                <input
+                  type="text"
+                  id="Name"
+                  name="name"
+                  className="w-full px-4 py-2 mt-1 border rounded-lg focus:ring "
+                  defaultValue={user.name}
+                  readOnly
+                />
+              </div>
+              {/* email  */}
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Email
+                </label>
+                <input
+                  type="text"
+                  id="Email"
+                  name="email"
+                  className="w-full px-4 py-2 mt-1 border rounded-lg focus:ring "
+                  defaultValue={user.email}
+                  readOnly
+                />
+              </div>
+              {/* mobile no  */}
+              <div>
+                <label
+                  htmlFor="phone"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  phone
+                </label>
+                <input
+                  type="number"
+                  id="phone"
+                  name="phone"
+                  className="w-full px-4 py-2 mt-1 border rounded-lg focus:ring "
+                  defaultValue={user.phone}
+                  placeholder="Enter mobile number"
+                />
+              </div>
+              {/* address  */}
+              <div>
+                <label
+                  htmlFor="address"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Address
+                </label>
+                <textarea
+                  rows={4}
+                  cols={3}
+                  type="text"
+                  id="address"
+                  name="address"
+                  className="w-full px-4 py-2 mt-1 border rounded-lg focus:ring "
+                  defaultValue={user.address}
+                  placeholder="Enter address"
+                />
+                <section className="flex justify-end items-center gap-2">
+                  <button type="submit" className="btn">
+                    {loader ? (
+                      <div className="disabled">
+                        <span className="loading loading-spinner loading-xs"></span>
+                      </div>
+                    ) : (
+                      <>Submit</>
+                    )}
+                  </button>
+                </section>
+              </div>
+            </form>
+          </div>
+        </div>
+      </dialog>
     </div>
   );
 };

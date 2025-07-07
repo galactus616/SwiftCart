@@ -1,0 +1,99 @@
+[
+  {
+    "id": 1,
+    "name": "Amul Masti Pouch Curd",
+    "brand": "Amul",
+    "category": "Dairy & Breakfast",
+    "rating": 4.5,
+    "reviewCount": 287,
+    "description": "Amul Masti Dahi is a delicious, creamy, and healthy curd that is perfect for any meal. Made from pasteurized toned milk, it is a rich source of calcium and protein, and contains active cultures that aid digestion.",
+    "images": [
+      "https://placehold.co/600x600/EFF6FF/1E40AF?text=Amul+Curd",
+      "https://placehold.co/600x600/DBEAFE/1D4ED8?text=Nutrition",
+      "https://placehold.co/600x600/BFDBFE/1E3A8A?text=Packaging",
+      "https://placehold.co/600x600/93C5FD/1C3D5A?text=Serving"
+    ],
+    "variants": [
+      { "sku": "AMUL-CURD-200", "weight": "200 g", "price": 20.00 },
+      { "sku": "AMUL-CURD-500", "weight": "500 g", "price": 48.00 },
+      { "sku": "AMUL-CURD-1KG", "weight": "1 kg", "price": 77.00 }
+    ]
+  },
+  { 
+    "id": 2, 
+    "name": "Mother Dairy Classic Cup Curd", 
+    "brand": "Mother Dairy", 
+    "category": "Dairy & Breakfast", 
+    "rating": 4.6, 
+    "reviewCount": 190, 
+    "images": ["https://placehold.co/600x600/F0F9FF/0284C7?text=MD+Curd"], 
+    "variants": [{ "sku": "MD-CURD-400", "weight": "400 g", "price": 50.00 }] 
+  },
+  { 
+    "id": 3, 
+    "name": "Milky Mist Farm Fresh Pouch Curd", 
+    "brand": "Milky Mist", 
+    "category": "Dairy & Breakfast", 
+    "rating": 4.3, 
+    "reviewCount": 154, 
+    "images": ["https://placehold.co/600x600/ECFEFF/0E7490?text=MM+Curd"], 
+    "variants": [{ "sku": "MM-CURD-500", "weight": "500 g", "price": 52.00 }] 
+  },
+  { 
+    "id": 4, 
+    "name": "Aashirvaad Svasti Pouch Curd", 
+    "brand": "Aashirvaad", 
+    "category": "Dairy & Breakfast", 
+    "rating": 4.4, 
+    "reviewCount": 132, 
+    "images": ["https://placehold.co/600x600/FDF2F8/BE185D?text=Aashirvaad+Curd"], 
+    "variants": [{ "sku": "AAS-CURD-400", "weight": "400 g", "price": 33.00 }] 
+  },
+  { 
+    "id": 5, 
+    "name": "Wireless Noise-Cancelling Headphones", 
+    "brand": "SoundWave", 
+    "category": "Electronics", 
+    "rating": 4.8, 
+    "reviewCount": 1230, 
+    "description": "Immerse yourself in music with these premium noise-cancelling headphones.", 
+    "images": ["https://placehold.co/600x600/F3F4F6/1F2937?text=Headphones"], 
+    "variants": [{ "sku": "SW-HP-BLK", "weight": "Black", "price": 249.99 }] 
+  },
+  { 
+    "id": 6, 
+    "name": "Smartwatch Series 8", 
+    "brand": "TechGear", 
+    "category": "Electronics", 
+    "rating": 4.9, 
+    "reviewCount": 2540, 
+    "description": "Stay connected and track your fitness with the latest generation smartwatch.", 
+    "images": ["https://placehold.co/600x600/ECFDF5/047857?text=Smartwatch"], 
+    "variants": [{ "sku": "TG-SW8-GRY", "weight": "Graphite", "price": 399.00 }] 
+  },
+  { 
+    "id": 7, 
+    "name": "Organic Whole Wheat Atta", 
+    "brand": "FarmFresh", 
+    "category": "Groceries", 
+    "rating": 4.7, 
+    "reviewCount": 890, 
+    "description": "Stone-ground whole wheat atta for soft and fluffy rotis.", 
+    "images": ["https://placehold.co/600x600/FEFCE8/854D0E?text=Atta"], 
+    "variants": [
+      { "sku": "FF-ATTA-5KG", "weight": "5 kg", "price": 250.00 },
+      { "sku": "FF-ATTA-10KG", "weight": "10 kg", "price": 480.00 }
+    ] 
+  },
+  { 
+    "id": 8, 
+    "name": "Cold Pressed Olive Oil", 
+    "brand": "Olio", 
+    "category": "Groceries", 
+    "rating": 4.6, 
+    "reviewCount": 560, 
+    "description": "Extra virgin olive oil, perfect for salads and cooking.", 
+    "images": ["https://placehold.co/600x600/F7FEE7/4D7C0F?text=Olive+Oil"], 
+    "variants": [{ "sku": "OLIO-EVOO-1L", "weight": "1 L", "price": 899.00 }] 
+  }
+]
