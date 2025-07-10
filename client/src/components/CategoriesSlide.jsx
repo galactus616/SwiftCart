@@ -19,7 +19,7 @@ const CategoriesSlide = ({ categories }) => {
   };
 
   return (
-    <section className="w-full py-6 px-2 sm:px-4 md:px-8">
+    <section className="w-full  py-6 px-2 sm:px-4 md:px-8">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-xl md:text-2xl font-bold text-green-800">
           Shop by Category
