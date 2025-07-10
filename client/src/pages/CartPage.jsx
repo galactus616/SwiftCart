@@ -126,7 +126,7 @@ const CartPage = () => {
                 </div>
                 <div className="flex-grow">
                   <h3 className="text-lg font-semibold text-gray-800">{item.product.name}</h3>
-                  <p className="text-gray-600">${item.product.price.toFixed(2)}</p>
+                  <p className="text-gray-600">${item.product.price}</p>
                   <div className="flex items-center mt-2">
                     <button onClick={() => handleUpdateQuantity(item.product.id || item.product._id, item.quantity - 1)} className="p-1 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
                       <FiMinus className="h-5 w-5 text-gray-600" />

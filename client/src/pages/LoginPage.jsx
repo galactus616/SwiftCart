@@ -40,12 +40,12 @@ const LoginPage = () => {
         {/* ... */}
         <div className="absolute bottom-0 left-0 w-full h-[65%] md:h-[70%] bg-[#C1E8FF] rounded-t-[100%] md:rounded-t-[50%]"></div>
         <div className="relative z-10 flex flex-col items-center justify-start w-full h-full pt-8 md:pt-12">
-          <header>{/* ... */}</header>
+         
           <main className="w-full flex flex-col items-center justify-center mt-8 md:mt-16 px-6 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-              Welcome!
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-16">
+              Welcome Back to SwiftCart!
             </h1>
-            <form onSubmit={handleSubmit} className="w-full max-w-sm">
+            <form onSubmit={handleSubmit} className="w-full max-w-sm mt-2">
               {/* Error and Input fields... */}
               {error && (
                 <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-4 text-sm">
@@ -87,13 +87,28 @@ const LoginPage = () => {
                 )}
               </button>
             </form>
-            <div className="w-full max-w-sm mt-12">
-              <button 
-                onClick={() => navigate("/register")} // ৫. রেজিস্ট্রেশন পেজের জন্য সঠিক URL path
-                className="w-full bg-white text-gray-800 font-bold py-4 px-4 rounded-full shadow-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-all duration-300 text-xl"
+            {/* <div className="w-full justify-center max-w-sm mt-12 flex gap-2"><span>Don't have an account</span>
+              <span 
+                onClick={() => navigate("/register")}
+                className="underline text-blue-600"
+            
               >
-                Create Account
-              </button>
+                register
+              </span>
+            </div> */}
+
+
+
+            <div className="w-full max-w-sm mt-12">
+              <p className="mt-4 text-sm text-gray-600">
+                Don't have an Account?{" "}
+                <button
+                  onClick={() => navigate("/register")} // ৪. লগইন পেজের জন্য সঠিক URL path
+                  className="font-bold hover:underline"
+                >
+                  Register
+                </button>
+              </p>
             </div>
           </main>
         </div>

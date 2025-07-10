@@ -50,9 +50,9 @@ const RegisterPage = () => {
 
           {/* Header section - LoginPage থেকে নেওয়া */}
           <header className="w-full flex flex-col items-center px-4 md:px-8">
-            <div className="w-full flex justify-between items-center max-w-md">
+            <div className="w-full flex justify-between items-baseline-last max-w-md item-center  ">
                 <img 
-                    src="https://i.imgur.com/gAYfJ3h.png" 
+                    src="../../public/Images/register images/register_image2.png" 
                     alt="Shopping cart full of groceries" 
                     className="w-24 h-auto md:w-32"
                     onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/100x100/F9A826/FFFFFF?text=Cart'; }}
@@ -61,7 +61,7 @@ const RegisterPage = () => {
                     <span className="text-gray-800 text-3xl font-bold">App</span>
                 </div>
                 <img 
-                    src="https://i.imgur.com/uM2y0f8.png" 
+                    src="../../public/Images/register images/register1.png" 
                     alt="Person pushing a shopping cart" 
                     className="w-24 h-auto md:w-32"
                     onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/100x100/F9A826/FFFFFF?text=Shopper'; }}
