@@ -11,10 +11,6 @@ import {
   Plus,
   Minus,
 } from "lucide-react";
-import { useNavigate, Link } from 'react-router-dom';
-import AuthModal from './AuthModal';
-import toast from "react-hot-toast";
-import useStore from '../../store/useStore';
 
 // Navbar component
 export default function Navbar() {
@@ -137,11 +133,11 @@ export default function Navbar() {
 
   return (
     <div className="font-sans">
-      <nav className="bg-white border-b border-gray-100 py-4 px-4 sm:px-6 lg:px-8 w-full shadow-sm">
+      <nav className="bg-white border-b z-20 border-gray-100 fixed top-0 py-4 px-4 sm:px-6 lg:px-8 w-full shadow-sm">
         <div className="w-full flex flex-wrap items-center justify-between md:flex-nowrap">
           {/* Logo */}
           <div className="flex items-center flex-shrink-0 order-1">
-            <div className="flex items-center space-x-3">
+            <Link to={'/'} className="flex items-center space-x-3">
               <div className="bg-green-600 p-2 rounded-lg shadow-sm">
                 <svg
                   className="w-6 h-6 text-white"
@@ -164,7 +160,7 @@ export default function Navbar() {
                   Quick & Fresh
                 </span>
               </div>
-            </div>
+            </Link>
           </div>
 
           {/* Mobile Icons */}
