@@ -23,7 +23,26 @@ const ProductCard = ({ product }) => {
   };
 
   return (
+<<<<<<< HEAD
     <div className="border border-green-100 rounded-2xl p-5 shadow-md hover:shadow-xl hover:scale-[1.03] transition-all duration-200 flex flex-col justify-between w-56 bg-white group cursor-pointer">
+=======
+    <div className="border border-green-100 rounded-2xl p-5 shadow-md  transition-all duration-200 flex flex-col justify-between w-56 bg-white group cursor-pointer">
+    <div className="relative border border-gray-100 rounded-xl p-4 flex flex-col w-56 bg-white group transition-all duration-200 hover:shadow-md hover:border-gray-200">
+      {/* Badges */}
+      <div className="absolute top-3 left-3 flex flex-col gap-1 z-10">
+        {product.isBestSeller ? (
+          <span className="bg-amber-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+            BESTSELLER
+          </span>
+        ) : product.isFeatured ? (
+          <span className="bg-blue-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+            FEATURED
+          </span>
+        ) : null}
+      </div>
+
+
+>>>>>>> 1a2ea7a2834e9ff2e8104a3e06cac8b099b6950e
       {/* Product Image */}
       <div className="flex justify-center items-center h-36 object-fill w-full bg-gray-50 rounded-lg overflow-hidden">
         <img
@@ -73,6 +92,14 @@ const ProductCard = ({ product }) => {
           )}
         </div>
 
+<<<<<<< HEAD
+=======
+        {/* Add Button */}
+        <button className="flex items-center gap-1 text-white bg-green-600 px-4 py-2 rounded-lg text-sm font-bold shadow hover:bg-green-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-500">
+          <Plus className="w-4 h-4" />
+          ADD
+        </button>
+>>>>>>> 1a2ea7a2834e9ff2e8104a3e06cac8b099b6950e
         {/* Price and Add Button Section - horizontal layout at the bottom */}
         <div className="flex items-center justify-between mt-auto pt-1">
           <div className="flex flex-col">
@@ -95,12 +122,15 @@ const ProductCard = ({ product }) => {
             <span>ADD</span>
           </button>
         </div>
+<<<<<<< HEAD
 
         {/* Add Button */}
         <button className="flex items-center gap-1 text-white bg-green-600 px-4 py-2 rounded-lg text-sm font-bold shadow hover:bg-green-700 hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-500">
           <Plus className="w-4 h-4" />
           ADD
         </button>
+=======
+>>>>>>> 1a2ea7a2834e9ff2e8104a3e06cac8b099b6950e
       </div>
     </div>
   );

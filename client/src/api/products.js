@@ -20,4 +20,9 @@ export async function getCategories() {
 export async function getProductsByCategory(categoryId) {
   const res = await axios.get(`${API_BASE}/categories/${encodeURIComponent(categoryId)}/products`, { withCredentials: true });
   return res.data;
+}
+
+export async function searchProducts(query) {
+  const res = await axios.get(`${API_BASE}?search=${encodeURIComponent(query)}`, { withCredentials: true });
+  return res.data;
 } 
