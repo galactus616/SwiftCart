@@ -141,6 +141,57 @@ const ProductDetails = ({ product }) => {
                 <h2 className="text-2xl font-bold text-gray-800 mb-6">Top 10 products in this category</h2>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
                     {/* Placeholder for related products */}
+                    {/* card-1  */}
+                    <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col">
+                        <div className="p-2"><img src="https://placehold.co/400x400/F0F9FF/0284C7?text=MD+Curd" alt="Related Product" className="w-full h-auto object-cover rounded-lg" /></div>
+                        <div className="p-4 flex flex-col flex-grow">
+                            <div className="flex items-center text-xs text-gray-500 font-medium mb-2"><svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1.5 text-gray-400" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.414-1.414L11 9.586V6z" clipRule="evenodd" /></svg>10 MINS</div>
+                            <h3 className="text-sm font-semibold text-gray-800 leading-tight h-10">Mother Dairy Classic Cup Curd</h3>
+                            <p className="text-xs text-gray-500 mt-1">400 g</p>
+                            <div className="mt-4 flex justify-between items-center"><p className="text-base font-bold text-gray-900">₹50.00</p><button className="border-2 border-green-600 text-green-700 font-bold text-sm py-2 px-6 rounded-lg hover:bg-green-50 transition-colors duration-300">ADD</button></div>
+                        </div>
+                    </div>
+                    {/* card-2  */}
+                    <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col">
+                        <div className="p-2"><img src="https://placehold.co/400x400/F0F9FF/0284C7?text=MD+Curd" alt="Related Product" className="w-full h-auto object-cover rounded-lg" /></div>
+                        <div className="p-4 flex flex-col flex-grow">
+                            <div className="flex items-center text-xs text-gray-500 font-medium mb-2"><svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1.5 text-gray-400" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.414-1.414L11 9.586V6z" clipRule="evenodd" /></svg>10 MINS</div>
+                            <h3 className="text-sm font-semibold text-gray-800 leading-tight h-10">Mother Dairy Classic Cup Curd</h3>
+                            <p className="text-xs text-gray-500 mt-1">400 g</p>
+                            <div className="mt-4 flex justify-between items-center"><p className="text-base font-bold text-gray-900">₹50.00</p><button className="border-2 border-green-600 text-green-700 font-bold text-sm py-2 px-6 rounded-lg hover:bg-green-50 transition-colors duration-300">ADD</button></div>
+                        </div>
+                    </div>
+                    {/* card-3  */}
+                    <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col">
+                        <div className="p-2"><img src="https://placehold.co/400x400/F0F9FF/0284C7?text=MD+Curd" alt="Related Product" className="w-full h-auto object-cover rounded-lg" /></div>
+                        <div className="p-4 flex flex-col flex-grow">
+                            <div className="flex items-center text-xs text-gray-500 font-medium mb-2"><svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1.5 text-gray-400" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.414-1.414L11 9.586V6z" clipRule="evenodd" /></svg>10 MINS</div>
+                            <h3 className="text-sm font-semibold text-gray-800 leading-tight h-10">Mother Dairy Classic Cup Curd</h3>
+                            <p className="text-xs text-gray-500 mt-1">400 g</p>
+                            <div className="mt-4 flex justify-between items-center"><p className="text-base font-bold text-gray-900">₹50.00</p><button className="border-2 border-green-600 text-green-700 font-bold text-sm py-2 px-6 rounded-lg hover:bg-green-50 transition-colors duration-300">ADD</button></div>
+                        </div>
+                    </div>
+                    {/* card-4  */}
+                    <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col">
+                        <div className="p-2"><img src="https://placehold.co/400x400/F0F9FF/0284C7?text=MD+Curd" alt="Related Product" className="w-full h-auto object-cover rounded-lg" /></div>
+                        <div className="p-4 flex flex-col flex-grow">
+                            <div className="flex items-center text-xs text-gray-500 font-medium mb-2"><svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1.5 text-gray-400" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.414-1.414L11 9.586V6z" clipRule="evenodd" /></svg>10 MINS</div>
+                            <h3 className="text-sm font-semibold text-gray-800 leading-tight h-10">Mother Dairy Classic Cup Curd</h3>
+                            <p className="text-xs text-gray-500 mt-1">400 g</p>
+                            <div className="mt-4 flex justify-between items-center"><p className="text-base font-bold text-gray-900">₹50.00</p><button className="border-2 border-green-600 text-green-700 font-bold text-sm py-2 px-6 rounded-lg hover:bg-green-50 transition-colors duration-300">ADD</button></div>
+                        </div>
+                    </div>
+                    {/* card-5 */}
+                    <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col">
+                        <div className="p-2"><img src="https://placehold.co/400x400/F0F9FF/0284C7?text=MD+Curd" alt="Related Product" className="w-full h-auto object-cover rounded-lg" /></div>
+                        <div className="p-4 flex flex-col flex-grow">
+                            <div className="flex items-center text-xs text-gray-500 font-medium mb-2"><svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1.5 text-gray-400" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.414-1.414L11 9.586V6z" clipRule="evenodd" /></svg>10 MINS</div>
+                            <h3 className="text-sm font-semibold text-gray-800 leading-tight h-10">Mother Dairy Classic Cup Curd</h3>
+                            <p className="text-xs text-gray-500 mt-1">400 g</p>
+                            <div className="mt-4 flex justify-between items-center"><p className="text-base font-bold text-gray-900">₹50.00</p><button className="border-2 border-green-600 text-green-700 font-bold text-sm py-2 px-6 rounded-lg hover:bg-green-50 transition-colors duration-300">ADD</button></div>
+                        </div>
+                    </div>
+                    {/* card-6  */}
                     <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col">
                         <div className="p-2"><img src="https://placehold.co/400x400/F0F9FF/0284C7?text=MD+Curd" alt="Related Product" className="w-full h-auto object-cover rounded-lg" /></div>
                         <div className="p-4 flex flex-col flex-grow">

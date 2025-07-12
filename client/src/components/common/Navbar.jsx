@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Search,
   ChevronDown,
@@ -11,6 +12,10 @@ import {
   Plus,
   Minus,
 } from "lucide-react";
+
+import useStore from './../../store/useStore';
+import AuthModal from './AuthModal';
+
 
 // Navbar component
 export default function Navbar() {
@@ -598,10 +603,10 @@ export default function Navbar() {
                 <span className="font-bold text-lg">
                   ₹{cartTotals.grandTotal.toFixed(2)}
                 </span>
-                <span className="flex items-center">
+                <Link to="/checkout" className="flex items-center">
                   Proceed{" "}
                   <ChevronDown className="w-5 h-5 ml-2 rotate-[-90deg]" />
-                </span>
+                </Link>
               </button>
             </div>
           </div>
