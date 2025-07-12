@@ -38,7 +38,7 @@ export default function Navbar() {
   const [isLocationModalOpen, setIsLocationModalOpen] = React.useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = React.useState(false);
   const [isCartOpen, setIsCartOpen] = React.useState(false);
-  const [currentLocation, setCurrentLocation] = React.useState("Dumduma, Bhubaneswar, Odisha");
+  const [currentLocation, setCurrentLocation] = React.useState("Dumdum, Kolkata");
   const [isAuthModalOpen, setIsAuthModalOpen] = React.useState(false);
 
   // Calculate cart totals

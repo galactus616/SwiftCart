@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { sendOtp } from '../../api/auth';
 import useStore from '../../store/useStore';
 
@@ -10,6 +10,18 @@ export default function AuthModal({ isOpen, onClose }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const { loginWithOtp } = useStore();
+
+  // Reset state when modal is opened
+  useEffect(() => {
+    if (isOpen) {
+      setStep(1);
+      setPhone('');
+      setOtp('');
+      setDevOtp('');
+      setLoading(false);
+      setError('');
+    }
+  }, [isOpen]);
 
   if (!isOpen) return null;
 

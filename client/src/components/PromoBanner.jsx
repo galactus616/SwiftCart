@@ -9,7 +9,7 @@ const PromoBanner = () => {
     >
       {/* Background Image with performance optimizations */}
       <img
-        src="https://res.cloudinary.com/deepmitra/image/upload/v1751828653/top-view-hand-holding-yogurt-bot_gcjgqw.jpg"
+        src="https://res.cloudinary.com/deepmitra/image/upload/v1752241825/home_page_kr451d.jpg"
         alt="Fresh groceries including fruits, vegetables, and yogurt"
         className="absolute inset-0 w-full h-full object-cover"
         loading="lazy"

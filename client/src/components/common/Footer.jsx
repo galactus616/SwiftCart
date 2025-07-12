@@ -178,17 +178,17 @@ const Footer = () => {
               <div className="flex items-center space-x-3">
                 <Mail className="w-4 h-4 text-green-600" />
                 <span className="text-gray-600 text-sm">
-                  info@swiftcart.com
+                  info@forgehivesolutions.com
                 </span>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="w-4 h-4 text-green-600" />
-                <span className="text-gray-600 text-sm">+91 98765 43210</span>
+                <span className="text-gray-600 text-sm">+91 9073098038</span>
               </div>
               <div className="flex items-center space-x-3">
                 <MapPin className="w-4 h-4 text-green-600" />
                 <span className="text-gray-600 text-sm">
-                  Bhubaneswar, Odisha
+                  Dumdum, Kolkata
                 </span>
               </div>
             </div>

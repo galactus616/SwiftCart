@@ -199,12 +199,8 @@ const dummyData = async () => {
     const products = await Product.insertMany(validProducts);
     console.log("Products seeded!");
 
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash("password", salt);
     const user = await User.create({
       name: "Test User",
-      email: "test@example.com",
-      password: hashedPassword,
       address: "123 Main St, Anytown, CA 90210",
       phone: "9876543210",
     });
@@ -213,99 +209,99 @@ const dummyData = async () => {
     // Use only valid product indices for dummy cart and orders
     const safeProduct = (arr, idx) => arr[idx] || arr[0];
 
-    const dummyCart = await Cart.create({
-      userId: user._id,
-      items: [
-        { productId: safeProduct(products, 0)._id, quantity: 2 },
-        { productId: safeProduct(products, 1)._id, quantity: 1 },
-      ],
-    });
-    console.log("Dummy cart seeded!");
+    // const dummyCart = await Cart.create({
+    //   userId: user._id,
+    //   items: [
+    //     { productId: safeProduct(products, 0)._id, variantIndex: 0, quantity: 2 },
+    //     { productId: safeProduct(products, 1)._id, variantIndex: 0, quantity: 1 },
+    //   ],
+    // });
+    // console.log("Dummy cart seeded!");
 
-    await Order.insertMany([
-      {
-        userId: user._id,
-        orderId: `ORD-${Date.now()}-001`,
-        date: new Date("2025-06-25"),
-        total: 250,
-        status: "Delivered",
-        items: [
-          {
-            product: {
-              id: safeProduct(products, 0)._id,
-              name: safeProduct(products, 0).name,
-              price: safeProduct(products, 0).price,
-              imageUrl: safeProduct(products, 0).imageUrl,
-            },
-            quantity: 2,
-          },
-          {
-            product: {
-              id: safeProduct(products, 1)._id,
-              name: safeProduct(products, 1).name,
-              price: safeProduct(products, 1).price,
-              imageUrl: safeProduct(products, 1).imageUrl,
-            },
-            quantity: 1,
-          },
-        ],
-        deliveryAddress: "123 Main St, Anytown, CA 90210",
-        phone: "9876543210",
-        paymentMethod: "cod",
-      },
-      {
-        userId: user._id,
-        orderId: `ORD-${Date.now()}-002`,
-        date: new Date("2025-06-20"),
-        total: 120,
-        status: "Delivered",
-        items: [
-          {
-            product: {
-              id: safeProduct(products, 2)._id,
-              name: safeProduct(products, 2).name,
-              price: safeProduct(products, 2).price,
-              imageUrl: safeProduct(products, 2).imageUrl,
-            },
-            quantity: 1,
-          },
-          {
-            product: {
-              id: safeProduct(products, 3)._id,
-              name: safeProduct(products, 3).name,
-              price: safeProduct(products, 3).price,
-              imageUrl: safeProduct(products, 3).imageUrl,
-            },
-            quantity: 2,
-          },
-        ],
-        deliveryAddress: "123 Main St, Anytown, CA 90210",
-        phone: "9876543210",
-        paymentMethod: "cod",
-      },
-      {
-        userId: user._id,
-        orderId: `ORD-${Date.now()}-003`,
-        date: new Date("2025-06-18"),
-        total: 180,
-        status: "Cancelled",
-        items: [
-          {
-            product: {
-              id: safeProduct(products, 4)._id,
-              name: safeProduct(products, 4).name,
-              price: safeProduct(products, 4).price,
-              imageUrl: safeProduct(products, 4).imageUrl,
-            },
-            quantity: 3,
-          },
-        ],
-        deliveryAddress: "123 Main St, Anytown, CA 90210",
-        phone: "9876543210",
-        paymentMethod: "cod",
-      },
-    ]);
-    console.log("Dummy orders seeded!");
+    // await Order.insertMany([
+    //   {
+    //     userId: user._id,
+    //     orderId: `ORD-${Date.now()}-001`,
+    //     date: new Date("2025-06-25"),
+    //     total: 250,
+    //     status: "Delivered",
+    //     items: [
+    //       {
+    //         product: {
+    //           id: safeProduct(products, 0)._id,
+    //           name: safeProduct(products, 0).name,
+    //           price: safeProduct(products, 0).price,
+    //           imageUrl: safeProduct(products, 0).imageUrl,
+    //         },
+    //         quantity: 2,
+    //       },
+    //       {
+    //         product: {
+    //           id: safeProduct(products, 1)._id,
+    //           name: safeProduct(products, 1).name,
+    //           price: safeProduct(products, 1).price,
+    //           imageUrl: safeProduct(products, 1).imageUrl,
+    //         },
+    //         quantity: 1,
+    //       },
+    //     ],
+    //     deliveryAddress: "123 Main St, Anytown, CA 90210",
+    //     phone: "9876543210",
+    //     paymentMethod: "cod",
+    //   },
+    //   {
+    //     userId: user._id,
+    //     orderId: `ORD-${Date.now()}-002`,
+    //     date: new Date("2025-06-20"),
+    //     total: 120,
+    //     status: "Delivered",
+    //     items: [
+    //       {
+    //         product: {
+    //           id: safeProduct(products, 2)._id,
+    //           name: safeProduct(products, 2).name,
+    //           price: safeProduct(products, 2).price,
+    //           imageUrl: safeProduct(products, 2).imageUrl,
+    //         },
+    //         quantity: 1,
+    //       },
+    //       {
+    //         product: {
+    //           id: safeProduct(products, 3)._id,
+    //           name: safeProduct(products, 3).name,
+    //           price: safeProduct(products, 3).price,
+    //           imageUrl: safeProduct(products, 3).imageUrl,
+    //         },
+    //         quantity: 2,
+    //       },
+    //     ],
+    //     deliveryAddress: "123 Main St, Anytown, CA 90210",
+    //     phone: "9876543210",
+    //     paymentMethod: "cod",
+    //   },
+    //   {
+    //     userId: user._id,
+    //     orderId: `ORD-${Date.now()}-003`,
+    //     date: new Date("2025-06-18"),
+    //     total: 180,
+    //     status: "Cancelled",
+    //     items: [
+    //       {
+    //         product: {
+    //           id: safeProduct(products, 4)._id,
+    //           name: safeProduct(products, 4).name,
+    //           price: safeProduct(products, 4).price,
+    //           imageUrl: safeProduct(products, 4).imageUrl,
+    //         },
+    //         quantity: 3,
+    //       },
+    //     ],
+    //     deliveryAddress: "123 Main St, Anytown, CA 90210",
+    //     phone: "9876543210",
+    //     paymentMethod: "cod",
+    //   },
+    // ]);
+    // console.log("Dummy orders seeded!");
 
     console.log("Data seeding complete!");
     process.exit();

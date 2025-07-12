@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE = '/api/cart';
+const API_BASE = 'https://swiftcart-asmy.onrender.com/api/cart';
 
 export async function getCart() {
   const res = await axios.get(API_BASE, { withCredentials: true });
